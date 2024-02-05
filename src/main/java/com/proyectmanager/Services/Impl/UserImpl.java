@@ -14,6 +14,8 @@ public class UserImpl implements IUserService {
     @Autowired
     private UserDao userDao;
 
+   
+    @SuppressWarnings("null")
     @Override
     public User save(UserDto userDto) {
         User user = User.builder()
@@ -22,16 +24,19 @@ public class UserImpl implements IUserService {
                 .lastName(userDto.getLastName())
                 .email(userDto.getEmail())
                 .phone(userDto.getPhone())
-                .dateRegiter(userDto.getDateRegiter())
+                .dateRegister(userDto.getDateRegister())
+                .idRol(userDto.getIdRol())
                 .build();
         return userDao.save(user);
     }
 
+    @SuppressWarnings("null")
     @Override
     public User findById(Integer id) {
         return userDao.findById(id).orElse(null);
     }
 
+    @SuppressWarnings("null")
     @Override
     public boolean existsById(Integer id) {
         return userDao.existsById(id);

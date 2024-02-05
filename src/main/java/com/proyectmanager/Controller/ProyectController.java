@@ -1,6 +1,5 @@
 package com.proyectmanager.Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,37 +9,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proyectmanager.Model.Dto.UserDto;
-import com.proyectmanager.Model.Entity.User;
+import com.proyectmanager.Model.Dto.ProyectDto;
+import com.proyectmanager.Model.Entity.Proyect;
 import com.proyectmanager.Model.Payload.MensajeResponse;
-import com.proyectmanager.Services.IUserService;
+import com.proyectmanager.Services.IProyectService;
 
 @RestController
 @RequestMapping("/app")
-public class Controller {
+public class ProyectController {
 
-    @Autowired
-    private IUserService userService;
+    private IProyectService proyectService;
 
-    @PostMapping("user")
+    @PostMapping("proyect")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> created(@RequestBody UserDto userDto) {
-        User userSave = null;
+    public ResponseEntity<?> created(@RequestBody ProyectDto proyectDto) {
+        Proyect proyectSave = null;
 
         try {
-            userSave = userService.save(userDto);
-            userDto = UserDto.builder()
-                    .id(userSave.getId())
-                    .name(userSave.getName())
-                    .lastName(userSave.getLastName())
-                    .email(userSave.getEmail())
-                    .phone(userSave.getPhone())
-                    .dateRegiter(userSave.getDateRegiter())
-                    .idRol(userSave.getIdRol())
+            proyectSave = proyectService.save(proyectDto);
+            proyectDto = ProyectDto.builder()
+                    .idProyect(proyectSave.getIdProyect())
+                    .name(proyectSave.getName())
+                    .dateStart(proyectSave.getDateStart())
+                    .dateEnd(proyectSave.getDateEnd())
+                    .dateCreation(proyectSave.getDateCreation())
+                    .idUser(proyectSave.getIdUser())
                     .build();
             return new ResponseEntity<>(MensajeResponse.builder()
                     .mensaje("Guardado Correctamente")
-                    .object(userDto)
+                    .object(proyectDto)
                     .build(),
                     HttpStatus.CREATED);
         } catch (DataAccessException DTeX) {
@@ -52,4 +49,5 @@ public class Controller {
         }
 
     }
+
 }

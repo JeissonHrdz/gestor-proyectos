@@ -22,7 +22,7 @@ public class UserDto {
     private String lastName; 
     private String email; 
     private String phone;  
-    private Date dateRegiter;  
+    private Date dateRegister;  
     private Integer idRol;
     
     

@@ -1,7 +1,5 @@
 package com.proyectmanager.Services;
 
-
-
 import com.proyectmanager.Model.Dto.UserDto;
 import com.proyectmanager.Model.Entity.User;
 

@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.ToString;
 
 @Data
@@ -30,25 +29,21 @@ public class User {
     private Integer id;
     
     @Column(name = "name")
-    @NonNull
     private String name;
 
     @Column(name = "last_name")
-    @NonNull
     private String lastName;
 
-    @Column(name = "email")
-    @NonNull
+    @Column(name = "email") 
     private String email;
 
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "date_register")
-    private Date dateRegiter;
+    private Date dateRegister;
 
     @Column(name = "id_rol")
-    @NonNull
     private Integer idRol;
     
     
