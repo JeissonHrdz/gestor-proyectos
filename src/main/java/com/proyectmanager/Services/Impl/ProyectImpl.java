@@ -18,9 +18,10 @@ public class ProyectImpl implements IProyectService {
 
     @Override
     public List<Proyect> listAll() {
-        throw new UnsupportedOperationException("Unimplemented method 'listAll'");
+        return (List) proyectDao.findAll();
     }
 
+    @SuppressWarnings("null")
     @Override
     public Proyect save(ProyectDto proyectDto) {
         Proyect proyect = Proyect.builder()
@@ -37,12 +38,12 @@ public class ProyectImpl implements IProyectService {
 
     @Override
     public Proyect findById(Integer id) {
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return proyectDao.findById(id).orElse(null);
     }
 
     @Override
     public void delete(Proyect Proyect) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+         proyectDao.delete(Proyect);
     }
 
 }
