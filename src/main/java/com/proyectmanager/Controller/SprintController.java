@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,7 @@ public class SprintController {
     }
 
     @GetMapping("sprints")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> findAllByProyect(@PathVariable("idProyect") Integer idProyect) {
         List<Sprint> sprint = sprintService.listAllByProyect(idProyect);
         if (sprint == null || sprint.isEmpty()) {
@@ -69,6 +71,45 @@ public class SprintController {
                         .build(),
                 HttpStatus.OK);
 
+    }
+
+    @GetMapping("sprints/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> showById(@PathVariable Integer id) {
+        Sprint sprint = sprintService.findById(id);
+
+        if (sprint == null) {
+
+            throw new ResourceNotFoundException("sprint", "id", id);
+        }
+        return new ResponseEntity<>(
+                MensajeResponse.builder()
+                        .mensaje("")
+                        .object(SprintDto.builder()
+                                .idSprint(sprint.getIdSprint())
+                                .idProyect(sprint.getIdProyect())
+                                .dateStart(sprint.getDateStart())
+                                .dateEnd(sprint.getDateEnd())
+                                .dateCreation(sprint.getDateCreation())
+                                .number(sprint.getNumber())
+                                .build())
+                        .build(),
+                HttpStatus.OK);
+    }
+
+    @DeleteMapping("sprints/{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        try {
+            Sprint sprintDelete = sprintService.findById(id);
+            sprintService.delete(sprintDelete);
+            return new ResponseEntity<>(sprintDelete, HttpStatus.NO_CONTENT);
+        } catch (DataAccessException DTeX) {
+            return new ResponseEntity<>(MensajeResponse.builder()
+                    .mensaje(DTeX.getMessage())
+                    .object(null)
+                    .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "proyect")
+@Table(name = "task")
 public class Task {
 
     @Id
