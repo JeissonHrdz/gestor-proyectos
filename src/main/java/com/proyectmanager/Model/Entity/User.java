@@ -45,6 +45,9 @@ public class User {
 
     @Column(name = "id_rol")
     private Integer idRol;
+
+    @Column(name = "password")
+    private String password;
     
     
 }

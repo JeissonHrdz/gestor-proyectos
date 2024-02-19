@@ -26,6 +26,7 @@ public class UserImpl implements IUserService {
                 .phone(userDto.getPhone())
                 .dateRegister(userDto.getDateRegister())
                 .idRol(userDto.getIdRol())
+                .password(userDto.getPassword())
                 .build();
         return userDao.save(user);
     }

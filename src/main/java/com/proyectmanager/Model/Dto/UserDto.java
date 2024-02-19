@@ -24,6 +24,7 @@ public class UserDto {
     private String phone;  
     private Date dateRegister;  
     private Integer idRol;
+    private String password;
     
     
 }

@@ -4,13 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
-import com.proyectmanager.Model.Entity.Sprint;
 import com.proyectmanager.Model.Entity.Task;
 
 public interface TaskDao extends CrudRepository<Task, Integer> {
 
         @Query("SELECT s FROM Task s WHERE s.idSprint = :idSprint")
-    List<Sprint> ListAllBySprint(Integer idSprint);
+    List<Task> ListAllBySprint(Integer idSprint);
     
 }
