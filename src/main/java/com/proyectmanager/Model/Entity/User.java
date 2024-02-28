@@ -1,6 +1,10 @@
 package com.proyectmanager.Model.Entity;
 
 import java.sql.Date;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +25,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @Column(name = "id_user")
@@ -48,6 +52,36 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {     
+        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    }
+
+    @Override
+    public String getUsername() {        
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {   
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {  
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {     
+        return true;
+    }
     
     
 }
