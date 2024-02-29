@@ -1,6 +1,7 @@
 package com.proyectmanager.Services.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.proyectmanager.Model.Dao.UserDao;
@@ -8,11 +9,16 @@ import com.proyectmanager.Model.Dto.UserDto;
 import com.proyectmanager.Model.Entity.User;
 import com.proyectmanager.Services.IUserService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserImpl implements IUserService {
 
     @Autowired
-    private UserDao userDao;
+    private  UserDao userDao; 
+    
+    private final PasswordEncoder passwordEncoder;
 
    
     @SuppressWarnings("null")
@@ -26,7 +32,7 @@ public class UserImpl implements IUserService {
                 .phone(userDto.getPhone())
                 .dateRegister(userDto.getDateRegister())
                 .idRol(userDto.getIdRol())
-                .password(userDto.getPassword())
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .build();
         return userDao.save(user);
     }

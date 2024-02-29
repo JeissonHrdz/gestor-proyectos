@@ -1,5 +1,6 @@
 package com.proyectmanager.Config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,6 +22,7 @@ public class SegurityConfig {
     private final AuthenticationProvider authProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf
@@ -28,7 +30,7 @@ public class SegurityConfig {
                 .authorizeHttpRequests(authRequest -> authRequest
                         .requestMatchers(HttpMethod.GET).permitAll()
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                        .requestMatchers("/Controller/LoginController").permitAll()
+                        .requestMatchers("/app/login").permitAll()                        
                         .anyRequest().authenticated())
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

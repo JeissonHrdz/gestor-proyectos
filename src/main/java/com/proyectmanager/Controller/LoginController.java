@@ -11,12 +11,15 @@ import com.proyectmanager.Model.Entity.AuthResponse;
 import com.proyectmanager.Model.Entity.LoginRequest;
 import com.proyectmanager.Services.IAuthService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/app")
+@RequiredArgsConstructor
 public class LoginController {
 
     @Autowired
-    private  IAuthService authService;
+    private final IAuthService authService;
 
     @PostMapping("login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request){
