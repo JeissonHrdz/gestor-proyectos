@@ -43,6 +43,7 @@ public class UserController {
                     .dateRegister(userSave.getDateRegister())
                     .idRol(userSave.getIdRol())
                     .password(userSave.getPassword())
+                    .username(userSave.getUsername())
                     .build();
             return new ResponseEntity<>(MensajeResponse.builder()
                     .mensaje("Guardado Correctamente")
@@ -82,6 +83,7 @@ public class UserController {
                                 .phone(user.getPhone())
                                 .idRol(user.getIdRol())
                                 .password(user.getPassword())
+                                .username(user.getUsername())
                                 .build())
                         .build(),
                 HttpStatus.OK);

@@ -4,7 +4,9 @@ import java.security.Key;
 import java.util.Map;
 
 import org.springframework.security.core.userdetails.UserDetails;
-
+import org.springframework.stereotype.Service;
+ 
+@Service
 public interface IJwtService {
 
     public String getToken(UserDetails user);

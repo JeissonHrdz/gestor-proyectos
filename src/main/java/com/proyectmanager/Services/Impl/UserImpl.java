@@ -21,7 +21,6 @@ public class UserImpl implements IUserService {
     private final PasswordEncoder passwordEncoder;
 
    
-    @SuppressWarnings("null")
     @Override
     public User save(UserDto userDto) {
         User user = User.builder()
@@ -33,17 +32,16 @@ public class UserImpl implements IUserService {
                 .dateRegister(userDto.getDateRegister())
                 .idRol(userDto.getIdRol())
                 .password(passwordEncoder.encode(userDto.getPassword()))
+                .username(userDto.getUsername())
                 .build();
         return userDao.save(user);
     }
 
-    @SuppressWarnings("null")
     @Override
     public User findById(Integer id) {
         return userDao.findById(id).orElse(null);
     }
 
-    @SuppressWarnings("null")
     @Override
     public boolean existsById(Integer id) {
         return userDao.existsById(id);

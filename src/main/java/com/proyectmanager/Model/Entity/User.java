@@ -2,12 +2,16 @@ package com.proyectmanager.Model.Entity;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -50,18 +54,22 @@ public class User implements UserDetails {
     @Column(name = "id_rol")
     private Integer idRol;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
+    
+    @Column(name = "username", nullable = false)
+    private String username;
+
+   
+    @Column(name = "role") 
+    @Enumerated(EnumType.STRING)
+    Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {     
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+        return List.of(new SimpleGrantedAuthority((role.name())));
     }
-
-    @Override
-    public String getUsername() {        
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
-    }
+   
 
     @Override
     public boolean isAccountNonExpired() {   

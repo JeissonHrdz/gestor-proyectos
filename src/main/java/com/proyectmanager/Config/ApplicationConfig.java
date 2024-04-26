@@ -1,5 +1,6 @@
 package com.proyectmanager.Config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
+
 
     private UserDao userDao;
 
@@ -43,7 +45,7 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return email -> userDao.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return username -> userDao.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
 }
