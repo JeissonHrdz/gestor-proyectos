@@ -28,10 +28,9 @@ public class SegurityConfig {
                  .csrf(csrf -> csrf
                         .disable())
                 .authorizeHttpRequests(authRequest -> authRequest
-                        .requestMatchers(HttpMethod.GET).permitAll()
-                        .requestMatchers(HttpMethod.POST).permitAll()
+                        .requestMatchers(HttpMethod.GET).permitAll()                 
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                        .requestMatchers("/app/**").permitAll()                        
+                        .requestMatchers("/auth/**").permitAll()                        
                         .anyRequest().authenticated())
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

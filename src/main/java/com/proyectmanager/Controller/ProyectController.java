@@ -25,6 +25,12 @@ import com.proyectmanager.Services.IProyectService;
 @RequestMapping("/app")
 public class ProyectController {
 
+
+   @PostMapping("prueba")
+    public String prueba(){
+        return "PRUEBA DE AUTENTICACION";
+    }
+
     @Autowired
     private IProyectService proyectService;
 

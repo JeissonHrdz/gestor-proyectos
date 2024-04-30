@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class ApplicationConfig {
 
 
+    @Autowired    
     private UserDao userDao;
 
     @Bean

@@ -1,6 +1,5 @@
 package com.proyectmanager.Services.Impl;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,24 +16,25 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public  class AuthImpl implements IAuthService{
+public class AuthImpl implements IAuthService {
 
-   @Autowired
-    private final UserDao userDao;   
-    
-    private final  IJwtService jwtService;  
-    private final AuthenticationManager authenticationManager;
+  @Autowired
+  private final UserDao userDao;
 
-    @Override
-  public AuthResponse login(LoginRequest request) {  
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user= userDao.findByUsername(request.getUsername()).orElseThrow();
-        String token=jwtService.getToken(user);
-        System.out.println(token);
-        return AuthResponse.builder()
-            .token(token)
-            .build();
+  private final IJwtService jwtService;
+  private final AuthenticationManager authenticationManager;
 
-    }
-    
+  @Override
+  public AuthResponse login(LoginRequest request) {
+    authenticationManager
+        .authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+    UserDetails user = userDao.findByUsername(request.getUsername()).orElseThrow();
+    String token = jwtService.getToken(user);
+    System.out.println(token);
+    return AuthResponse.builder()
+        .token(token)
+        .build();
+
+  }
+
 }
