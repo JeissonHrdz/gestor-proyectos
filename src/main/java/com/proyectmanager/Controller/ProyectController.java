@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,11 +26,11 @@ import com.proyectmanager.Services.IProyectService;
 
 @RestController
 @RequestMapping("/app")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProyectController {
 
-
-   @PostMapping("prueba")
-    public String prueba(){
+    @PostMapping("prueba")
+    public String prueba() {
         return "PRUEBA DE AUTENTICACION";
     }
 
@@ -35,6 +38,7 @@ public class ProyectController {
     private IProyectService proyectService;
 
     @PostMapping("proyect")
+    
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> created(@RequestBody ProyectDto proyectDto) {
         Proyect proyectSave = null;

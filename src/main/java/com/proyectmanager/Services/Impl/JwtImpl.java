@@ -6,10 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.proyectmanager.Model.Dao.UserDao;
+import com.proyectmanager.Model.Entity.User;
 import com.proyectmanager.Services.IJwtService;
+import com.proyectmanager.Services.IUserService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -24,6 +28,9 @@ public class JwtImpl implements  IJwtService {
 
     private static final String SECRET_KEY = "586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
 
+    @Autowired
+    private IUserService userService;
+
     @Override
     public String getToken(UserDetails user) {
         return getToken(new HashMap<>(), user);
@@ -31,6 +38,9 @@ public class JwtImpl implements  IJwtService {
 
     @Override
     public String getToken(Map<String, Object> extraClaims, UserDetails user) {
+      
+        extraClaims.put("UUID",userService.findUserId(user.getUsername()));
+
        return Jwts
        .builder()
        .setClaims(extraClaims)

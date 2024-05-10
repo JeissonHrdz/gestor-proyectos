@@ -7,6 +7,7 @@ public interface IUserService {
 
     User save(UserDto user);
     User findById(Integer id);
+    Integer findUserId(String username);
     boolean existsById(Integer id);
 
 }

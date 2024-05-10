@@ -29,8 +29,9 @@ public class SegurityConfig {
                         .disable())
                 .authorizeHttpRequests(authRequest -> authRequest
                         .requestMatchers(HttpMethod.GET).permitAll()                 
-                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                        .requestMatchers("/auth/**").permitAll()                        
+                        .requestMatchers(HttpMethod.OPTIONS).permitAll()  
+                        .requestMatchers("/auth/**").permitAll()    
+                                              
                         .anyRequest().authenticated())
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
