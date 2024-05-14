@@ -40,8 +40,10 @@ public class ProyectController {
 
     @PostMapping("proyect")    
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> created(@RequestBody ProyectDto proyectDto, @RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<?> created(@RequestBody ProyectDto proyectDto) {
         Proyect proyectSave = null;
+
+        System.out.println("HEADER:");
 
         try {
             proyectSave = proyectService.save(proyectDto);
