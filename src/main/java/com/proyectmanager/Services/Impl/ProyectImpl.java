@@ -16,12 +16,13 @@ public class ProyectImpl implements IProyectService {
     @Autowired
     private ProyectDao proyectDao;
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public List<Proyect> listAll() {
         return (List) proyectDao.findAll();
     }
 
-    @SuppressWarnings("null")
+
     @Override
     public Proyect save(ProyectDto proyectDto) {
         Proyect proyect = Proyect.builder()
@@ -41,9 +42,17 @@ public class ProyectImpl implements IProyectService {
         return proyectDao.findById(id).orElse(null);
     }
 
+   
+
     @Override
     public void delete(Proyect Proyect) {
          proyectDao.delete(Proyect);
+    }
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Override
+    public List<Proyect> listAllByIdUser(Integer idUser) {
+        return (List) proyectDao.findAllProyectsByUserId(idUser);
     }
 
 }

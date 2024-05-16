@@ -123,6 +123,22 @@ public class ProyectController {
                         .object(getList)
                         .build(),
                 HttpStatus.OK);
+    }
+
+    @GetMapping("proyects/{idUser}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> showAllProyectByIdUser(@PathVariable Integer idUser) {
+        List<Proyect> getList = proyectService.listAllByIdUser(idUser);
+
+        if (getList == null || getList.isEmpty()) {
+            throw new ResourceNotFoundException("proyect");
+        }
+        return new ResponseEntity<>(
+                MensajeResponse.builder()
+                        .mensaje("")
+                        .object(getList)
+                        .build(),
+                HttpStatus.OK);
 
     }
 

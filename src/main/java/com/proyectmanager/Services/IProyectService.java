@@ -11,5 +11,6 @@ public interface IProyectService {
     Proyect save(ProyectDto proyect);
     Proyect findById(Integer id);
     void delete(Proyect Proyect);
+    List<Proyect> listAllByIdUser(Integer idUser);
     
 }
