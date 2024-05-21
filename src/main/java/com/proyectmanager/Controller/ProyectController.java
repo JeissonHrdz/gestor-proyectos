@@ -6,24 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyectmanager.Exceptions.ResourceNotFoundException;
 import com.proyectmanager.Model.Dto.ProyectDto;
+import com.proyectmanager.Model.Dto.UserProyectDto;
 import com.proyectmanager.Model.Entity.Proyect;
 import com.proyectmanager.Model.Payload.MensajeResponse;
 import com.proyectmanager.Services.IProyectService;
+import com.proyectmanager.Services.IUserProyectService;
 
 @RestController
 @RequestMapping("/app")
@@ -38,7 +37,10 @@ public class ProyectController {
     @Autowired
     private IProyectService proyectService;
 
-    @PostMapping("proyect")    
+    @Autowired
+    private IUserProyectService userProyectService;
+
+    @PostMapping("proyect")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> created(@RequestBody ProyectDto proyectDto) {
         Proyect proyectSave = null;
@@ -55,6 +57,15 @@ public class ProyectController {
                     .dateCreation(proyectSave.getDateCreation())
                     .idUser(proyectSave.getIdUser())
                     .build();
+
+                    System.out.println(proyectSave.getIdUser() +"--"+ proyectSave.getIdProyect());
+            UserProyectDto userProyectDto = UserProyectDto.builder()
+                    .idUser(proyectSave.getIdUser())
+                    .idProyect(proyectSave.getIdProyect())
+                    .build();
+                userProyectService.save(userProyectDto);
+
+
             return new ResponseEntity<>(MensajeResponse.builder()
                     .mensaje("Guardado Correctamente")
                     .object(proyectDto)
@@ -133,12 +144,14 @@ public class ProyectController {
         if (getList == null || getList.isEmpty()) {
             throw new ResourceNotFoundException("proyect");
         }
-        return new ResponseEntity<>(
-                MensajeResponse.builder()
-                        .mensaje("")
-                        .object(getList)
-                        .build(),
-                HttpStatus.OK);
+        return new ResponseEntity<>(getList, HttpStatus.OK);
+        /*
+         * MensajeResponse.builder()
+         * .mensaje("")
+         * .object(getList)
+         * .build(),
+         * HttpStatus.OK);
+         */
 
     }
 

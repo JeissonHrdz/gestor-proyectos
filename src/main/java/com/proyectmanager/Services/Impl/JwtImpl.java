@@ -5,16 +5,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import com.proyectmanager.Model.Dao.UserDao;
-import com.proyectmanager.Model.Entity.User;
 import com.proyectmanager.Services.IJwtService;
 import com.proyectmanager.Services.IUserService;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
