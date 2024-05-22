@@ -57,14 +57,12 @@ public class ProyectController {
                     .dateCreation(proyectSave.getDateCreation())
                     .idUser(proyectSave.getIdUser())
                     .build();
-
-                    System.out.println(proyectSave.getIdUser() +"--"+ proyectSave.getIdProyect());
+           
             UserProyectDto userProyectDto = UserProyectDto.builder()
                     .idUser(proyectSave.getIdUser())
                     .idProyect(proyectSave.getIdProyect())
                     .build();
-                userProyectService.save(userProyectDto);
-
+            userProyectService.save(userProyectDto);
 
             return new ResponseEntity<>(MensajeResponse.builder()
                     .mensaje("Guardado Correctamente")
