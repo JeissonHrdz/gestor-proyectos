@@ -1,12 +1,18 @@
 package com.proyectmanager.Model.Entity;
 
 import java.util.Date;
+import java.util.Set;
+
+import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,6 +49,11 @@ public class Proyect {
     @Column(name = "date_creation")
     private Date dateCreation;
 
+    @ManyToMany(mappedBy = "proyects")
+    private Set<User> users;
+
+
+   
 
     
 }

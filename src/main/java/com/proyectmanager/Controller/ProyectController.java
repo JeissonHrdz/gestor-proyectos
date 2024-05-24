@@ -1,6 +1,7 @@
 package com.proyectmanager.Controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -23,6 +24,7 @@ import com.proyectmanager.Model.Entity.Proyect;
 import com.proyectmanager.Model.Payload.MensajeResponse;
 import com.proyectmanager.Services.IProyectService;
 import com.proyectmanager.Services.IUserProyectService;
+import com.proyectmanager.Services.IUserService;
 
 @RestController
 @RequestMapping("/app")
@@ -39,6 +41,9 @@ public class ProyectController {
 
     @Autowired
     private IUserProyectService userProyectService;
+
+    @Autowired
+    private IUserService userService;
 
     @PostMapping("proyect")
     @ResponseStatus(HttpStatus.CREATED)
@@ -137,7 +142,7 @@ public class ProyectController {
     @GetMapping("proyects/{idUser}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> showAllProyectByIdUser(@PathVariable Integer idUser) {
-        List<Proyect> getList = proyectService.listAllByIdUser(idUser);
+        Set<Proyect> getList = userService.getProyectsByUserId(idUser);  //proyectService.listAllByIdUser(idUser);
 
         if (getList == null || getList.isEmpty()) {
             throw new ResourceNotFoundException("proyect");

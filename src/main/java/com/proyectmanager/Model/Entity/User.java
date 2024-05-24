@@ -3,6 +3,7 @@ package com.proyectmanager.Model.Entity;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +16,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -59,11 +63,20 @@ public class User implements UserDetails {
     
     @Column(name = "username", nullable = false)
     private String username;
-
    
     @Column(name = "role") 
     @Enumerated(EnumType.STRING)
     Role role;
+
+    @ManyToMany
+    @JoinTable(
+        name = "user_proyect",
+        joinColumns = @JoinColumn(name = "id_user"),
+        inverseJoinColumns = @JoinColumn(name = "id_proyect") 
+        )
+    private Set<Proyect> proyects;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {     
