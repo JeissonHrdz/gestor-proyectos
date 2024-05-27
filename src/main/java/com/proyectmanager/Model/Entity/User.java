@@ -68,13 +68,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     Role role;
 
-    @ManyToMany
-    @JoinTable(
-        name = "user_proyect",
-        joinColumns = @JoinColumn(name = "id_user"),
-        inverseJoinColumns = @JoinColumn(name = "id_proyect") 
-        )
-    private Set<Proyect> proyects;
+    @ManyToMany(mappedBy = "users")
+    private Set<Proyect> projects; 
 
 
 

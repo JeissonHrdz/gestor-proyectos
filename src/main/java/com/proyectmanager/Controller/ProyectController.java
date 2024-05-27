@@ -143,7 +143,7 @@ public class ProyectController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> showAllProyectByIdUser(@PathVariable Integer idUser) {
         Set<Proyect> getList = userService.getProyectsByUserId(idUser);  //proyectService.listAllByIdUser(idUser);
-
+        
         if (getList == null || getList.isEmpty()) {
             throw new ResourceNotFoundException("proyect");
         }
