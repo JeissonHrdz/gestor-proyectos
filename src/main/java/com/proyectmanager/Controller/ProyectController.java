@@ -3,6 +3,8 @@ package com.proyectmanager.Controller;
 import java.util.List;
 import java.util.Set;
 
+
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,7 @@ public class ProyectController {
     public String prueba() {
         return "PRUEBA DE AUTENTICACION";
     }
+
 
     @Autowired
     private IProyectService proyectService;
@@ -141,12 +144,12 @@ public class ProyectController {
 
     @GetMapping("proyects/{idUser}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> showAllProyectByIdUser(@PathVariable Integer idUser) {
+    public ResponseEntity<?> showAllProjectByIdUser(@PathVariable Integer idUser) {
         Set<Proyect> getList = userService.getProyectsByUserId(idUser);  //proyectService.listAllByIdUser(idUser);
         
-        if (getList == null || getList.isEmpty()) {
-            throw new ResourceNotFoundException("proyect");
-        }
+       /* if (getList == null || getList.isEmpty()) {
+            throw new ResourceNotFoundException("project");
+        }*/
         return new ResponseEntity<>(getList, HttpStatus.OK);
         /*
          * MensajeResponse.builder()

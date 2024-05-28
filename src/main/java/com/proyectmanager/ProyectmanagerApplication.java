@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.proyectmanager")
+//@ComponentScan("com.proyectmanager")
 public class ProyectmanagerApplication {
 
 	public static void main(String[] args) {

@@ -52,7 +52,7 @@ public class Proyect {
     @Column(name = "date_creation")
     private Date dateCreation;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
         name = "user_proyect",
         joinColumns = @JoinColumn(name = "id_proyect"),

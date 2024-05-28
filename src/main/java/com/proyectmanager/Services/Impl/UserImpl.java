@@ -59,8 +59,8 @@ public class UserImpl implements IUserService {
     @Override
       public Set<Proyect> getProyectsByUserId(Integer idUser) {
         User user = userDao.findById(idUser).orElse(null);//.orElseThrow(() -> new RuntimeException("User not found"));
-        
-        return user.getProjects();
+        assert user != null;
+        return user.getProyects();
     }
 
 }
