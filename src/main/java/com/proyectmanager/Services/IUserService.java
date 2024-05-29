@@ -1,5 +1,6 @@
 package com.proyectmanager.Services;
 
+import java.util.List;
 import java.util.Set;
 
 import com.proyectmanager.Model.Dto.UserDto;
@@ -12,6 +13,6 @@ public interface IUserService {
     User findById(Integer id);
     Integer findUserId(String username);
     boolean existsById(Integer id);
-    Set<Proyect> getProyectsByUserId(Integer idUser);
+    List<Proyect> getProyectsByUserId(Integer idUser);
 
 }

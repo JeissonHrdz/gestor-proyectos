@@ -1,8 +1,10 @@
 package com.proyectmanager.Model.Entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.CascadeType;
@@ -52,13 +54,14 @@ public class Proyect {
     @Column(name = "date_creation")
     private Date dateCreation;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
         name = "user_proyect",
         joinColumns = @JoinColumn(name = "id_proyect"),
         inverseJoinColumns = @JoinColumn(name = "id_user")
     )
-    private Set<User> users;
+    private List<User> users;
 
    
 

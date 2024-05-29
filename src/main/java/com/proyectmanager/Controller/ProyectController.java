@@ -145,11 +145,11 @@ public class ProyectController {
     @GetMapping("proyects/{idUser}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> showAllProjectByIdUser(@PathVariable Integer idUser) {
-        Set<Proyect> getList = userService.getProyectsByUserId(idUser);  //proyectService.listAllByIdUser(idUser);
+        List<Proyect> getList = userService.getProyectsByUserId(idUser);  //proyectService.listAllByIdUser(idUser);
         
-       /* if (getList == null || getList.isEmpty()) {
+        if (getList == null || getList.isEmpty()) {
             throw new ResourceNotFoundException("project");
-        }*/
+        }
         return new ResponseEntity<>(getList, HttpStatus.OK);
         /*
          * MensajeResponse.builder()

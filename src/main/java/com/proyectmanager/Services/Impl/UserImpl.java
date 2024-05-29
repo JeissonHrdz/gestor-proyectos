@@ -1,5 +1,6 @@
 package com.proyectmanager.Services.Impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +58,9 @@ public class UserImpl implements IUserService {
     }
 
     @Override
-      public Set<Proyect> getProyectsByUserId(Integer idUser) {
+      public List<Proyect> getProyectsByUserId(Integer idUser) {
         User user = userDao.findById(idUser).orElse(null);//.orElseThrow(() -> new RuntimeException("User not found"));
-        assert user != null;
+               // assert user != null;
         return user.getProyects();
     }
 
