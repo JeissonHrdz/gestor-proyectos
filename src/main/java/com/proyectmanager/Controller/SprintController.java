@@ -58,12 +58,14 @@ public class SprintController {
         if (sprint == null || sprint.isEmpty()) {
             throw new ResourceNotFoundException("proyect", "id", idProyect);
         }
-        return new ResponseEntity<>(
+
+        return new ResponseEntity<>(sprint, HttpStatus.OK);
+       /* return new ResponseEntity<>(
                 MensajeResponse.builder()
                         .mensaje("")
                         .object(sprint)
                         .build(),
-                HttpStatus.OK);
+                HttpStatus.OK);*/
 
     }
 
