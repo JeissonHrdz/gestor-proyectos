@@ -53,8 +53,6 @@ public class ProyectController {
     public ResponseEntity<?> created(@RequestBody ProyectDto proyectDto) {
         Proyect proyectSave = null;
 
-        System.out.println("HEADER:");
-
         try {
             proyectSave = proyectService.save(proyectDto);
             proyectDto = ProyectDto.builder()
