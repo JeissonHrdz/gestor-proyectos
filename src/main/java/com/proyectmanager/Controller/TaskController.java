@@ -5,14 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.proyectmanager.Exceptions.ResourceNotFoundException;
 import com.proyectmanager.Model.Dto.TaskDto;
 import com.proyectmanager.Model.Entity.Task;
@@ -20,13 +13,14 @@ import com.proyectmanager.Model.Payload.MensajeResponse;
 import com.proyectmanager.Services.ITaskService;
 
 @RestController
-@RequestMapping("/app/proyect/{idProyect}/sprints/{id}")
+@RequestMapping("/app/proyect/{idProyect}/sprints")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TaskController {
 
     @Autowired
     private ITaskService taskService;
 
-    @PostMapping("tasks")
+    @PostMapping("task")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody TaskDto taskDto) {
         Task taskSave = null;
@@ -38,6 +32,7 @@ public class TaskController {
                     .idSprint(taskSave.getIdSprint())
                     .name(taskSave.getName())
                     .description(taskSave.getDescription())
+                    .pripority(taskSave.getPripority())
                     .status(taskSave.getStatus())
                     .dateCreation(taskSave.getDateCreation())
                     .build();
