@@ -28,7 +28,7 @@ public class TaskImpl implements ITaskService {
                 .idSprint(taskDto.getIdSprint())
                 .name(taskDto.getName())
                 .description(taskDto.getDescription())
-                .pripority(taskDto.getPripority())
+                .priority(taskDto.getPriority())
                 .status(taskDto.getStatus())
                 .dateCreation(taskDto.getDateCreation())
                 .build();

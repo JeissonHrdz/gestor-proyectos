@@ -32,7 +32,7 @@ public class TaskController {
                     .idSprint(taskSave.getIdSprint())
                     .name(taskSave.getName())
                     .description(taskSave.getDescription())
-                    .pripority(taskSave.getPripority())
+                    .priority(taskSave.getPriority())
                     .status(taskSave.getStatus())
                     .dateCreation(taskSave.getDateCreation())
                     .build();

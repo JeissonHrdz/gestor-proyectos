@@ -21,7 +21,7 @@ public class TaskDto {
     private Integer idTask;
     private String name;
     private String description;
-    private String pripority;
+    private String priority;
     private String status;   
     private Date dateCreation;
     private Integer idSprint;

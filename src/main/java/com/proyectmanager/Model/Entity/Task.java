@@ -35,7 +35,7 @@ public class Task {
     private String description;
 
     @Column(name = "priority")
-    private String pripority;
+    private String priority;
 
     @Column(name = "status")
     private String status;
