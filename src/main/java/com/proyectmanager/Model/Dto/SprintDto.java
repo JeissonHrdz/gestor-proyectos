@@ -20,6 +20,6 @@ public class SprintDto {
     private Date  dateStart;
     private Date dateEnd;
     private Integer number;
-    private Integer idProyect;
+    private Integer idProject;
     private Date dateCreation;
 }

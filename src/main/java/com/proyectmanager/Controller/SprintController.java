@@ -15,7 +15,7 @@ import com.proyectmanager.Model.Payload.MensajeResponse;
 import com.proyectmanager.Services.ISprintService;
 
 @RestController
-@RequestMapping("/app/proyect/{idProyect}")
+@RequestMapping("/app/project/{idProject}")
 @CrossOrigin(origins = "http://localhost:4200")
 public class SprintController {
 
@@ -31,7 +31,7 @@ public class SprintController {
             sprintSave = sprintService.save(sprintDto);
             sprintDto = SprintDto.builder()
                     .idSprint(sprintSave.getIdSprint())
-                    .idProyect(sprintSave.getIdProyect())
+                    .idProject(sprintSave.getIdProject())
                     .dateStart(sprintSave.getDateStart())
                     .dateEnd(sprintSave.getDateEnd())
                     .dateCreation(sprintSave.getDateCreation())
@@ -53,10 +53,10 @@ public class SprintController {
 
     @GetMapping("sprints")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> findAllByProyect(@PathVariable("idProyect") Integer idProyect) {
-        List<Sprint> sprint = sprintService.listAllByProyect(idProyect);
+    public ResponseEntity<?> findAllByProyect(@PathVariable("idProject") Integer idProject) {
+        List<Sprint> sprint = sprintService.listAllByProject(idProject);
         if (sprint == null || sprint.isEmpty()) {
-            throw new ResourceNotFoundException("proyect", "id", idProyect);
+            throw new ResourceNotFoundException("proyect", "id", idProject);
         }
 
         return new ResponseEntity<>(sprint, HttpStatus.OK);
@@ -83,7 +83,7 @@ public class SprintController {
                         .mensaje("")
                         .object(SprintDto.builder()
                                 .idSprint(sprint.getIdSprint())
-                                .idProyect(sprint.getIdProyect())
+                                .idProject(sprint.getIdProject())
                                 .dateStart(sprint.getDateStart())
                                 .dateEnd(sprint.getDateEnd())
                                 .dateCreation(sprint.getDateCreation())

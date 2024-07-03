@@ -16,17 +16,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@IdClass(UserProyectPK.class)
+@IdClass(UserProjectPK.class)
 @Builder
-@Table(name = "user_proyect")
-public class UserProyect {
+@Table(name = "user_project")
+public class UserProject {
 
     @Id
     @Column(name = "id_user") 
     private Integer idUser;
 
     @Id
-    @Column(name = "id_proyect")
-    private Integer idProyect;
+    @Column(name = "id_project")
+    private Integer idProject;
 
 }

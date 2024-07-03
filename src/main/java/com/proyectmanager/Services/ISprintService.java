@@ -7,7 +7,7 @@ import com.proyectmanager.Model.Entity.Sprint;
 
 public interface ISprintService {
 
-    List<Sprint> listAllByProyect(Integer idProyect);
+    List<Sprint> listAllByProject(Integer idProject);
 
     Sprint save(SprintDto sprintDto);
 

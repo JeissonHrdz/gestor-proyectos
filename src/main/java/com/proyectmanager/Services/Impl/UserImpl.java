@@ -1,7 +1,6 @@
 package com.proyectmanager.Services.Impl;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.proyectmanager.Model.Dao.UserDao;
 import com.proyectmanager.Model.Dto.UserDto;
-import com.proyectmanager.Model.Entity.Proyect;
+import com.proyectmanager.Model.Entity.Project;
 import com.proyectmanager.Model.Entity.User;
 import com.proyectmanager.Services.IUserService;
 
@@ -58,10 +57,10 @@ public class UserImpl implements IUserService {
     }
 
     @Override
-      public List<Proyect> getProyectsByUserId(Integer idUser) {
+      public List<Project> getProyectsByUserId(Integer idUser) {
         User user = userDao.findById(idUser).orElse(null);//.orElseThrow(() -> new RuntimeException("User not found"));
                // assert user != null;
-        return user.getProyects();
+        return user.getProjects();
     }
 
 }

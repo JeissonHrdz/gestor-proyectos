@@ -13,7 +13,7 @@ import com.proyectmanager.Model.Payload.MensajeResponse;
 import com.proyectmanager.Services.ITaskService;
 
 @RestController
-@RequestMapping("/app/proyect/{idProyect}/sprints")
+@RequestMapping("/app/project/{idProject}/sprints")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TaskController {
 

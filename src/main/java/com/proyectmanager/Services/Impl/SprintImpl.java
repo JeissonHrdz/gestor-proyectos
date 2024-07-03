@@ -20,7 +20,7 @@ public class SprintImpl implements ISprintService {
     public Sprint save(SprintDto sprintDto) {
         Sprint sprint = Sprint.builder()
                 .idSprint(sprintDto.getIdSprint())
-                .idProyect(sprintDto.getIdProyect())
+                .idProject(sprintDto.getIdProject())
                 .dateStart(sprintDto.getDateStart())
                 .dateEnd(sprintDto.getDateEnd())
                 .dateCreation(sprintDto.getDateCreation())
@@ -40,8 +40,8 @@ public class SprintImpl implements ISprintService {
     }
 
     @Override
-    public List<Sprint> listAllByProyect(Integer idProyect) {
-        return (List) sprintDao.ListAllByProyect(idProyect);
+    public List<Sprint> listAllByProject(Integer idProject) {
+        return (List) sprintDao.ListAllByProject(idProject);
     }
 
 }

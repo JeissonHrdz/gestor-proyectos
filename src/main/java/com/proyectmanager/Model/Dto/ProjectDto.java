@@ -13,10 +13,10 @@ import lombok.ToString;
 @ToString
 @Builder
 
-public class ProyectDto {
+public class ProjectDto {
 
  
-    private Integer idProyect;   
+    private Integer idProject;
     private String name;
     private Date dateStart;
     private Date dateEnd;

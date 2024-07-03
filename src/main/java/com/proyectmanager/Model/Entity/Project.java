@@ -2,10 +2,8 @@ package com.proyectmanager.Model.Entity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,7 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,11 +28,11 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "proyect")
-public class Proyect {
+@Table(name = "project")
+public class Project {
 
     @Id
-    @Column(name = "id_proyect")
+    @Column(name = "id_project")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProyect;
 
@@ -57,8 +54,8 @@ public class Proyect {
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
-        name = "user_proyect",
-        joinColumns = @JoinColumn(name = "id_proyect"),
+        name = "user_project",
+        joinColumns = @JoinColumn(name = "id_project"),
         inverseJoinColumns = @JoinColumn(name = "id_user")
     )
     private List<User> users;

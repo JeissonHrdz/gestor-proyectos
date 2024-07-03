@@ -3,7 +3,6 @@ package com.proyectmanager.Model.Entity;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -61,7 +60,7 @@ public class User implements UserDetails {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    private List<Proyect> proyects;
+    private List<Project> projects;
 
 
     @Override

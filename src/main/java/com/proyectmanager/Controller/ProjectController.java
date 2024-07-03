@@ -1,10 +1,9 @@
 package com.proyectmanager.Controller;
 
 import java.util.List;
-import java.util.Set;
 
 
-import org.slf4j.LoggerFactory;
+import com.proyectmanager.Model.Entity.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -20,18 +19,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyectmanager.Exceptions.ResourceNotFoundException;
-import com.proyectmanager.Model.Dto.ProyectDto;
-import com.proyectmanager.Model.Dto.UserProyectDto;
-import com.proyectmanager.Model.Entity.Proyect;
+import com.proyectmanager.Model.Dto.ProjectDto;
+import com.proyectmanager.Model.Dto.UserProjectDto;
 import com.proyectmanager.Model.Payload.MensajeResponse;
-import com.proyectmanager.Services.IProyectService;
-import com.proyectmanager.Services.IUserProyectService;
+import com.proyectmanager.Services.IProjectService;
+import com.proyectmanager.Services.IUserProjectService;
 import com.proyectmanager.Services.IUserService;
 
 @RestController
 @RequestMapping("/app")
 @CrossOrigin(origins = "http://localhost:4200")
-public class ProyectController {
+public class ProjectController {
 
     @PostMapping("prueba")
     public String prueba() {
@@ -40,39 +38,39 @@ public class ProyectController {
 
 
     @Autowired
-    private IProyectService proyectService;
+    private IProjectService proyectService;
 
     @Autowired
-    private IUserProyectService userProyectService;
+    private IUserProjectService userProjectService;
 
     @Autowired
     private IUserService userService;
 
-    @PostMapping("proyect")
+    @PostMapping("project")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> created(@RequestBody ProyectDto proyectDto) {
-        Proyect proyectSave = null;
+    public ResponseEntity<?> created(@RequestBody ProjectDto projectDto) {
+        Project projectSave = null;
 
         try {
-            proyectSave = proyectService.save(proyectDto);
-            proyectDto = ProyectDto.builder()
-                    .idProyect(proyectSave.getIdProyect())
-                    .name(proyectSave.getName())
-                    .dateStart(proyectSave.getDateStart())
-                    .dateEnd(proyectSave.getDateEnd())
-                    .dateCreation(proyectSave.getDateCreation())
-                    .idUser(proyectSave.getIdUser())
+            projectSave = proyectService.save(projectDto);
+            projectDto = ProjectDto.builder()
+                    .idProject(projectSave.getIdProyect())
+                    .name(projectSave.getName())
+                    .dateStart(projectSave.getDateStart())
+                    .dateEnd(projectSave.getDateEnd())
+                    .dateCreation(projectSave.getDateCreation())
+                    .idUser(projectSave.getIdUser())
                     .build();
            
-            UserProyectDto userProyectDto = UserProyectDto.builder()
-                    .idUser(proyectSave.getIdUser())
-                    .idProyect(proyectSave.getIdProyect())
+            UserProjectDto userProjectDto = UserProjectDto.builder()
+                    .idUser(projectSave.getIdUser())
+                    .idProject(projectSave.getIdProyect())
                     .build();
-            userProyectService.save(userProyectDto);
+            userProjectService.save(userProjectDto);
 
             return new ResponseEntity<>(MensajeResponse.builder()
                     .mensaje("Guardado Correctamente")
-                    .object(proyectDto)
+                    .object(projectDto)
                     .build(),
                     HttpStatus.CREATED);
         } catch (DataAccessException DTeX) {
@@ -85,36 +83,36 @@ public class ProyectController {
 
     }
 
-    @GetMapping("proyect/{id}")
+    @GetMapping("project/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
-        Proyect proyect = proyectService.findById(id);
-        if (proyect == null) {
-            throw new ResourceNotFoundException("proyect", "id", id);
+        Project project = proyectService.findById(id);
+        if (project == null) {
+            throw new ResourceNotFoundException("project", "id", id);
         }
 
         return new ResponseEntity<>(
                 MensajeResponse.builder()
                         .mensaje("")
-                        .object(ProyectDto.builder()
-                                .idProyect(proyect.getIdProyect())
-                                .name(proyect.getName())
-                                .dateStart(proyect.getDateStart())
-                                .dateEnd(proyect.getDateEnd())
-                                .dateCreation(proyect.getDateCreation())
-                                .idUser(proyect.getIdUser())
+                        .object(ProjectDto.builder()
+                                .idProject(project.getIdProyect())
+                                .name(project.getName())
+                                .dateStart(project.getDateStart())
+                                .dateEnd(project.getDateEnd())
+                                .dateCreation(project.getDateCreation())
+                                .idUser(project.getIdUser())
                                 .build())
                         .build(),
                 HttpStatus.OK);
 
     }
 
-    @DeleteMapping("proyect/{id}")
+    @DeleteMapping("project/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
 
         try {
-            Proyect proyectDelete = proyectService.findById(id);
-            proyectService.delete(proyectDelete);
-            return new ResponseEntity<>(proyectDelete, HttpStatus.NO_CONTENT);
+            Project projectDelete = proyectService.findById(id);
+            proyectService.delete(projectDelete);
+            return new ResponseEntity<>(projectDelete, HttpStatus.NO_CONTENT);
         } catch (DataAccessException DTeX) {
             return new ResponseEntity<>(MensajeResponse.builder()
                     .mensaje(DTeX.getMessage())
@@ -124,10 +122,10 @@ public class ProyectController {
         }
     }
 
-    @GetMapping("proyect")
+    @GetMapping("project")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> showAll() {
-        List<Proyect> getList = proyectService.listAll();
+        List<Project> getList = proyectService.listAll();
 
         if (getList == null || getList.isEmpty()) {
             throw new ResourceNotFoundException("proyect");
@@ -140,10 +138,10 @@ public class ProyectController {
                 HttpStatus.OK);
     }
 
-    @GetMapping("proyects/{idUser}")
+    @GetMapping("projects/{idUser}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> showAllProjectByIdUser(@PathVariable Integer idUser) {
-        List<Proyect> getList = userService.getProyectsByUserId(idUser);  //proyectService.listAllByIdUser(idUser);
+        List<Project> getList = userService.getProyectsByUserId(idUser);  //proyectService.listAllByIdUser(idUser);
         
         if (getList == null || getList.isEmpty()) {
             throw new ResourceNotFoundException("project");

@@ -9,7 +9,7 @@ import com.proyectmanager.Model.Entity.Sprint;
 
 public interface SprintDao extends CrudRepository<Sprint, Integer> {
 
-    @Query("SELECT s FROM Sprint s WHERE s.idProyect = :idProyect")
-    List<Sprint> ListAllByProyect(Integer idProyect);
+    @Query("SELECT s FROM Sprint s WHERE s.idProject = :idProyect")
+    List<Sprint> ListAllByProject(Integer idProyect);
     
 }

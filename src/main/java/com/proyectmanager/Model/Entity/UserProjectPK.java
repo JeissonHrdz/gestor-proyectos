@@ -3,15 +3,15 @@ package com.proyectmanager.Model.Entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class UserProyectPK implements Serializable{
+public class UserProjectPK implements Serializable{
 
     private Integer idUser;
-    private Integer  idProyect;
+    private Integer  idProject;
 
-    public UserProyectPK(){}
+    public UserProjectPK(){}
 
-    public UserProyectPK(Integer idUser, Integer idProyect){
-        this.idProyect = idProyect;
+    public UserProjectPK(Integer idUser, Integer idProject){
+        this.idProject = idProject;
         this.idUser = idUser;
     }
 
@@ -19,14 +19,14 @@ public class UserProyectPK implements Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserProyectPK that = (UserProyectPK) o;
+        UserProjectPK that = (UserProjectPK) o;
         return Objects.equals(idUser, that.idUser) &&
-               Objects.equals(idProyect, that.idProyect);
+               Objects.equals(idProject, that.idProject);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUser, idProyect);
+        return Objects.hash(idUser, idProject);
     }
 
 

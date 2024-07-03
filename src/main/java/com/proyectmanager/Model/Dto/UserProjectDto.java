@@ -11,9 +11,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class UserProyectDto {
+public class UserProjectDto {
 
     private Integer idUser;
-    private Integer idProyect;
+    private Integer idProject;
     
 }

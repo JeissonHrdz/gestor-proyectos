@@ -37,8 +37,8 @@ public class Sprint {
     @Column(name = "number")
     private Integer number;
 
-    @Column(name = "id_proyect")
-    private Integer idProyect;
+    @Column(name = "id_project")
+    private Integer idProject;
 
     @Column(name = "date_creation")
     private Date dateCreation;
