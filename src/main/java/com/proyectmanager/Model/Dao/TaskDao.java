@@ -10,5 +10,8 @@ public interface TaskDao extends CrudRepository<Task, Integer> {
 
         @Query("SELECT s FROM Task s WHERE s.idSprint = :idSprint")
     List<Task> ListAllBySprint(Integer idSprint);
+
+    @Query("SELECT s FROM Task s WHERE s.idProject = :idProject")
+    List<Task> ListAllByProject(Integer idProject);
     
 }

@@ -35,6 +35,7 @@ public class TaskController {
                     .priority(taskSave.getPriority())
                     .status(taskSave.getStatus())
                     .dateCreation(taskSave.getDateCreation())
+                    .idProject(taskSave.getIdProject())
                     .build();
 
             return new ResponseEntity<>(MensajeResponse.builder()
@@ -58,6 +59,22 @@ public class TaskController {
         List<Task> task = taskService.listAllBySprint(idSprint);
         if (task == null || task.isEmpty()) {
             throw new ResourceNotFoundException("sprint", "id", idSprint);
+        }
+        return new ResponseEntity<>(
+                MensajeResponse.builder()
+                        .mensaje("")
+                        .object(task)
+                        .build(),
+                HttpStatus.OK);
+
+    }
+
+    @GetMapping("taskss")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> findAllByProject(@PathVariable Integer idProject) {
+        List<Task> task = taskService.listAllByProject(idProject);
+        if (task == null || task.isEmpty()) {
+            throw new ResourceNotFoundException("sprint", "id", idProject);
         }
         return new ResponseEntity<>(
                 MensajeResponse.builder()

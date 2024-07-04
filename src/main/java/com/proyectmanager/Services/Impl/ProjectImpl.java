@@ -26,7 +26,7 @@ public class ProjectImpl implements IProjectService {
     @Override
     public Project save(ProjectDto projectDto) {
         Project project = Project.builder()
-                .idProyect(projectDto.getIdProject())
+                .idProject(projectDto.getIdProject())
                 .name(projectDto.getName())
                 .dateStart(projectDto.getDateStart())
                 .dateEnd(projectDto.getDateEnd())

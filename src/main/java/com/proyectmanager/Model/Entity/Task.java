@@ -45,4 +45,7 @@ public class Task {
 
     @Column(name = "id_sprint")
     private Integer idSprint;
+
+    @Column(name = "id_project")
+    private Integer idProject;
 }

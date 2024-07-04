@@ -25,4 +25,5 @@ public class TaskDto {
     private String status;   
     private Date dateCreation;
     private Integer idSprint;
+    private Integer idProject;
 }

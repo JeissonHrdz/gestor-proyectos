@@ -54,7 +54,7 @@ public class ProjectController {
         try {
             projectSave = proyectService.save(projectDto);
             projectDto = ProjectDto.builder()
-                    .idProject(projectSave.getIdProyect())
+                    .idProject(projectSave.getIdProject())
                     .name(projectSave.getName())
                     .dateStart(projectSave.getDateStart())
                     .dateEnd(projectSave.getDateEnd())
@@ -64,7 +64,7 @@ public class ProjectController {
            
             UserProjectDto userProjectDto = UserProjectDto.builder()
                     .idUser(projectSave.getIdUser())
-                    .idProject(projectSave.getIdProyect())
+                    .idProject(projectSave.getIdProject())
                     .build();
             userProjectService.save(userProjectDto);
 
@@ -94,7 +94,7 @@ public class ProjectController {
                 MensajeResponse.builder()
                         .mensaje("")
                         .object(ProjectDto.builder()
-                                .idProject(project.getIdProyect())
+                                .idProject(project.getIdProject())
                                 .name(project.getName())
                                 .dateStart(project.getDateStart())
                                 .dateEnd(project.getDateEnd())

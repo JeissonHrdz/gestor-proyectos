@@ -22,6 +22,11 @@ public class TaskImpl implements ITaskService {
     }
 
     @Override
+    public List<Task> listAllByProject(Integer idProject) {
+        return (List) taskDao.ListAllByProject(idProject);
+    }
+
+    @Override
     public Task save(TaskDto taskDto) {
         Task task = Task.builder()
                 .idTask(taskDto.getIdTask())
@@ -31,6 +36,7 @@ public class TaskImpl implements ITaskService {
                 .priority(taskDto.getPriority())
                 .status(taskDto.getStatus())
                 .dateCreation(taskDto.getDateCreation())
+                .idProject(taskDto.getIdProject())
                 .build();
         return taskDao.save(task);
     }

@@ -11,6 +11,8 @@ public interface ITaskService {
 
     List<Task> listAllBySprint(Integer idSprint);
 
+    List<Task> listAllByProject(Integer idProject);
+
     Task save(TaskDto taskDto);
 
     Task findById(Integer id);
