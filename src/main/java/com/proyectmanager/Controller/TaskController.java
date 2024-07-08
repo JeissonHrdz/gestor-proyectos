@@ -76,12 +76,7 @@ public class TaskController {
         if (task == null || task.isEmpty()) {
             throw new ResourceNotFoundException("sprint", "id", idProject);
         }
-        return new ResponseEntity<>(
-                MensajeResponse.builder()
-                        .mensaje("")
-                        .object(task)
-                        .build(),
-                HttpStatus.OK);
+        return new ResponseEntity<>(task, HttpStatus.OK);
 
     }
 
