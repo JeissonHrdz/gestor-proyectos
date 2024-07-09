@@ -49,7 +49,6 @@ public class TaskController {
                     .object(null)
                     .build(),
                     HttpStatus.METHOD_NOT_ALLOWED);
-
         }
     }
 
@@ -66,6 +65,30 @@ public class TaskController {
                         .object(task)
                         .build(),
                 HttpStatus.OK);
+
+    }
+
+    @PutMapping("task/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public  ResponseEntity<?> changeStatusTask(@PathVariable Integer id, @RequestParam String status){
+
+    try{
+        boolean isUpdate = taskService.updateStatus(id, status);
+        if(isUpdate){
+            return new ResponseEntity<>(MensajeResponse.builder()
+                    .mensaje("Status Update Successfully")
+                    .build(), HttpStatus.OK );
+        } else {
+            return new ResponseEntity<>(MensajeResponse.builder()
+                    .mensaje("Task not found")
+                    .build(), HttpStatus.OK );
+        }
+    }catch (Exception e){
+        return new ResponseEntity<>(MensajeResponse.builder()
+                .mensaje(e.getMessage())
+                .build(), HttpStatus.INTERNAL_SERVER_ERROR );
+
+    }
 
     }
 

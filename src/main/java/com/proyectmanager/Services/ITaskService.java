@@ -18,5 +18,7 @@ public interface ITaskService {
     Task findById(Integer id);
 
     void delete(Task task);
+
+    boolean updateStatus(Integer idTask, String status);
     
 } 

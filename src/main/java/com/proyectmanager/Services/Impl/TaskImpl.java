@@ -51,4 +51,9 @@ public class TaskImpl implements ITaskService {
         taskDao.delete(task);
     }
 
+    @Override
+    public boolean updateStatus(Integer idTask, String status) {
+        return taskDao.updateTaskStatus(idTask, status) > 0;
+    }
+
 }
