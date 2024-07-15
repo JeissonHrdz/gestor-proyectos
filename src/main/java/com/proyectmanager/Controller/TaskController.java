@@ -1,6 +1,8 @@
 package com.proyectmanager.Controller;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -70,25 +72,24 @@ public class TaskController {
 
     @PutMapping("task/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public  ResponseEntity<?> changeStatusTask(@PathVariable Integer id, @RequestParam String status){
+    public  ResponseEntity<?> changeStatusTask(@PathVariable Integer id, @RequestBody Map<String, String> status){
 
-    try{
-        boolean isUpdate = taskService.updateStatus(id, status);
-        if(isUpdate){
+        try {
+            String newStatus = status.get("status");
+            taskService.updateStatus(id, newStatus);
+
             return new ResponseEntity<>(MensajeResponse.builder()
-                    .mensaje("Status Update Successfully")
-                    .build(), HttpStatus.OK );
-        } else {
+                    .mensaje("Status updated successfully")
+                    .object(null)
+                    .build(), HttpStatus.OK);
+
+        } catch (DataAccessException DTeX) {
             return new ResponseEntity<>(MensajeResponse.builder()
-                    .mensaje("Task not found")
-                    .build(), HttpStatus.OK );
+                    .mensaje(DTeX.getMessage())
+                    .object(null)
+                    .build(),
+                    HttpStatus.METHOD_NOT_ALLOWED);
         }
-    }catch (Exception e){
-        return new ResponseEntity<>(MensajeResponse.builder()
-                .mensaje(e.getMessage())
-                .build(), HttpStatus.INTERNAL_SERVER_ERROR );
-
-    }
 
     }
 
@@ -96,6 +97,7 @@ public class TaskController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> findAllByProject(@PathVariable Integer idProject) {
         List<Task> task = taskService.listAllByProject(idProject);
+
         if (task == null || task.isEmpty()) {
             throw new ResourceNotFoundException("sprint", "id", idProject);
         }

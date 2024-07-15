@@ -15,7 +15,7 @@ public interface TaskDao extends CrudRepository<Task, Integer> {
     @Query("SELECT s FROM Task s WHERE s.idProject = :idProject")
     List<Task> ListAllByProject(Integer idProject);
 
-    @Query("UPDATE Task t set t.status = :newStatus WHERE t.idTask = :idTask")
-    int updateTaskStatus(@Param("idTask") Integer idTask, @Param("newStatus") String newStatus);
+    @Query("UPDATE Task t set t.status = :status WHERE t.idTask = :id")
+    int updateTaskStatus(@Param("id") Integer idTask, @Param("status") String status);
     
 }

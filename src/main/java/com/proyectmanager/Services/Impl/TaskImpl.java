@@ -2,6 +2,7 @@ package com.proyectmanager.Services.Impl;
 
 import java.util.List;
 
+import com.proyectmanager.Exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,8 +53,10 @@ public class TaskImpl implements ITaskService {
     }
 
     @Override
-    public boolean updateStatus(Integer idTask, String status) {
-        return taskDao.updateTaskStatus(idTask, status) > 0;
+    public void updateStatus(Integer idTask, String status) {
+      Task task = taskDao.findById(idTask).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+      task.setStatus(status);
+      taskDao.save(task);
     }
 
 }

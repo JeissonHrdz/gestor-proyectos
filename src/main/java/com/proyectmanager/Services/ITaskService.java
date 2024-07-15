@@ -19,6 +19,6 @@ public interface ITaskService {
 
     void delete(Task task);
 
-    boolean updateStatus(Integer idTask, String status);
+    void updateStatus(Integer idTask, String status);
     
 } 
